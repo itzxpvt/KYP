@@ -1,0 +1,27 @@
+{
+  "name": "Ban All Protection",
+  "description": "Protects Telegram groups by monitoring admin ban actions. Auto-demotes admins who exceed set ban limits.",
+  "env": {
+    "API_ID": {
+      "description": "Your Telegram API ID",
+      "required": true
+    },
+    "API_HASH": {
+      "description": "Your Telegram API HASH",
+      "required": true
+    },
+    "BOT_TOKEN": {
+      "description": "Telegram Bot Token",
+      "required": true
+    },
+    "MONGO_URL": {
+      "description": "MongoDB Connection String",
+      "required": true
+    }
+  },
+  "buildpacks": [
+    {
+      "url": "heroku/python"
+    }
+  ]
+}
