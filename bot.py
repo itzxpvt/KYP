@@ -11,22 +11,6 @@ from config import API_ID, API_HASH, BOT_TOKEN, ALLOWED_CHAT_IDS, BATCH_GROUPS, 
 
 #LgcyAlex@123
 
-# API_ID = ""
-# API_HASH = ""
-# BOT_TOKEN = ""
-
-# ALLOWED_CHAT_IDS = [6397654988, -1002344515129]
-
-# BATCH_GROUPS = {
-#     "January": [-1002428161649],
-#     "February": [-1002563300801],
-#     "March": [-1002578015396],
-#     "April": [-1002325824742]
-# }
-
-
-# TIME_ZONE = "Asia/Kolkata"
-
 app = Client("learner_bot", api_id=API_ID, api_hash=API_HASH, bot_token=BOT_TOKEN)
 
 
@@ -246,30 +230,6 @@ async def start_command(client, message: Message):
             pass
 
 
-@app.on_message(filters.command(["delete", "del"]) & filters.reply)
-async def delete_replied_message(client, message: Message):
-    try:
-        # Send initial "deleting" animation message
-        status_msg = await message.reply("⚡️")
-        
-        # Animate by editing the message
-        await asyncio.sleep(1)
-        await status_msg.edit("🧹Deleting.")
-        await asyncio.sleep(0.5)
-        await status_msg.edit("🧹 Deleting...")
-        await asyncio.sleep(0.5)
-
-        # Perform deletions
-        await message.reply_to_message.delete()
-        await message.delete()
-        await status_msg.delete()
-
-    except Exception as e:
-        err_msg = await safe_send_message(client, message.chat.id, f"> ⚠️ Could not delete message: {e}")
-        await asyncio.sleep(5)
-        await err_msg.delete()
-
-
 @app.on_message(filters.text & (filters.private | filters.group))
 async def handle_message(client, message: Message):
     chat_id = message.chat.id
@@ -294,7 +254,7 @@ async def handle_message(client, message: Message):
         return
 
     total = len(found_learners)
-    start_time = datetime.now()
+    start_time = datetime.now(pytz.timezone(TIME_ZONE))
     formatted_start = start_time.strftime("%I:%M:%S %p").lstrip("0")
 
     sending_msg = await safe_send_message(client, chat_id, "📤 Sending...")
@@ -342,7 +302,7 @@ async def handle_message(client, message: Message):
     except:
         pass
 
-    end_time = datetime.now()
+    end_time = datetime.now(pytz.timezone(TIME_ZONE))
     duration = (end_time - start_time).total_seconds()
     est_minutes = round(duration / 60, 1)
 
