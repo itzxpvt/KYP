@@ -13,10 +13,6 @@
     "BOT_TOKEN": {
       "description": "Telegram Bot Token",
       "required": true
-    },
-    "MONGO_URL": {
-      "description": "MongoDB Connection String",
-      "required": true
     }
   },
   "buildpacks": [
