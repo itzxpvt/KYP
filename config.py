@@ -19,10 +19,12 @@ ALLOWED_CHAT_IDS = [
 
 # Mapping of batches to their respective group chat IDs
 BATCH_GROUPS = {
-    "January":  [-1002428161649],
+    "January":  [-1002548457919],
     "February": [-1002563300801],
     "March":    [-1002578015396],
-    "April":    [-1002325824742]
+    "April":    [-1002325824742],
+    "May":    [-1002532210897]
+    
 }
 
 # Time zone setting
